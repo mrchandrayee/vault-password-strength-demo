@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VAULT — How strong is that password, really?</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<div class="browser">
+ <header class="browserbar"><div class="traffic"><i></i><i></i><i></i></div><div class="brand"><b>VAULT</b><span>· how strong is that password, really?</span></div><div class="url">localhost / vault</div></header>
+ <main class="app">
+  <section class="checker">
+   <div class="field-head"><label for="password">Password</label><button id="suggest">Suggest strong</button></div>
+   <div class="input-wrap"><input id="password" type="password" placeholder="Start typing..." autocomplete="off" spellcheck="false"><button id="toggleVisibility" aria-label="Show password"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+   <article class="lock-card" id="lockCard">
+    <div class="lock-visual" id="lockVisual"></div>
+    <div class="lock-info"><div class="meter" id="meter"><i></i><i></i><i></i><i></i></div><h2 id="tierName">No lock at all</h2><p id="crackTime">The door is standing open.</p><small id="entropy">0 bits of entropy</small></div>
+   </article>
+   <div class="message" id="message">Your password is the key.<br>Let's see what it can hold.</div>
+  </section>
+  <section class="source-panels">
+   <article class="source"><header><span class="file-icon purple"></span><b>index.html</b><small>one object</small></header><pre><code><em>&lt;!-- ONE door, all the way up.
+     What holds the seam shut is
+     whatever you've earned. --&gt;</em>
+<span class="tag">&lt;div</span> class="lock"<span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> class="chip"<span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> class="door" id="door"<span class="tag">&gt;</span>
+      <span class="tag">&lt;svg</span> viewBox="0 0 150 150 260 260"<span class="tag">&gt;</span>
+        <em>&lt;!-- paperclip · padlock
+             deadbolt · bank vault --&gt;</em>
+      <span class="tag">&lt;/svg&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+
+  <span class="tag">&lt;div</span> class="meter"<span class="tag">&gt;</span>
+    <span class="tag">&lt;i</span> class="seg" data-t="1"<span class="tag">&gt;&lt;/i&gt;</span>
+    <span class="tag">&lt;i</span> class="seg" data-t="2"<span class="tag">&gt;&lt;/i&gt;</span>
+    <em>&lt;!-- 3, 4 --&gt;</em>
+  <span class="tag">&lt;/div&gt;</span></code></pre></article>
+   <article class="source"><header><span class="file-icon blue"></span><b>script.js</b><small>a playhead, not a switch</small></header><pre><code><em>// real entropy, in bits</em>
+<span class="kw">const</span> bits = len * Math.log2(pool);
+
+<span class="kw">const</span> tier = bits &lt; <span class="num">30</span> ? <span class="num">1</span> <em>// paperclip</em>
+           : bits &lt; <span class="num">50</span> ? <span class="num">2</span> <em>// padlock</em>
+           : bits &lt; <span class="num">70</span> ? <span class="num">3</span> <em>// deadbolt</em>
+           : <span class="num">4</span>;           <em>// vault</em>
+
+<em>// ALL four builds live on ONE
+// timeline. The tier isn't a
+// switch — it's a PLAYHEAD.
+//
+// Which is why a backspace
+// doesn't reset the lock.
+// It UN-BUILDS it.</em>
+<span class="fn">tl</span>.tweenTo(MARK[tier], {
+  duration: .9,
+  ease: <span class="str">'power2.inOut'</span>
+});</code></pre></article>
+  </section>
+ </main>
+ <footer><span>VAULT / PASSWORD LAB</span><span>STRENGTH IS EARNED, NOT ASSUMED</span></footer>
+</div>
+<div class="toast" id="toast"></div><script src="app.js"></script>
+</body></html>
